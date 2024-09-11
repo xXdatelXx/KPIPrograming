@@ -38,9 +38,7 @@ public sealed class NumberSystem : INumberSystem
          wholePart /= systemOrder;
       }
 
-      var charArray = result.ToCharArray();
-      Array.Reverse(charArray);
-      result = new string(charArray);
+      result = new string(result.Reverse().ToArray());
 
       if (fracPart == 0)
          return result;
@@ -51,9 +49,9 @@ public sealed class NumberSystem : INumberSystem
       for (int i = 0; i < _precision && fracPart > 0; i++)
       {
          fracPart *= systemOrder;
-         int remainder = (int)fracPart;
-         result += targetNumberSystem[remainder];
-         fracPart -= (int)fracPart;
+         int wholeRemainder = (int)fracPart;
+         result += targetNumberSystem[wholeRemainder];
+         fracPart -= wholeRemainder;
       }
 
       return result;
